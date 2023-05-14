@@ -25,8 +25,8 @@
   "properties": [],
   "overriddenProperties": [],
   "parent": {
-    "name": "Objects",
-    "path": "folders/Objects.yy",
+    "name": "danceroom",
+    "path": "folders/objects/danceroom.yy",
   },
   "resourceVersion": "1.0",
   "name": "_pldr_pictogram",

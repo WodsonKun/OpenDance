@@ -134,8 +134,8 @@
   "iosCocoaPodDependencies": "",
   "tvosCocoaPodDependencies": "",
   "parent": {
-    "name": "Extensions",
-    "path": "folders/Extensions.yy",
+    "name": "extensiondata",
+    "path": "folders/enginedata/extensiondata.yy",
   },
   "resourceVersion": "1.2",
   "name": "libWebMPlayer",

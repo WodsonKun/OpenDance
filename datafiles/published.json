@@ -1,0 +1,69 @@
+{
+    "songs": [{
+            "id": "Boombayah",
+            "artist": "BLACKPINK",
+            "name": "BOOMBAYAH",
+			"locid": 8023,
+            "coaches": 4,
+            "status": "QC_VERIFIED",
+            "avatars": [],
+            "difficulty": 4,
+            "jdversion": 2022
+        }, {
+            "id": "CantStopTheFeeling",
+            "artist": "Justin Timberlake",
+            "name": "CAN'T STOP THE FEELING",
+            "coaches": 2,
+            "status": "QC_VERIFIED",
+            "avatars": [],
+            "difficulty": 2,
+            "jdversion": 2023
+        }, {
+            "id": "ComeBackHome",
+            "artist": "2NE1",
+            "name": "COME BACK HOME",
+			"coaches": 3,
+            "status": "QC_VERIFIED",
+            "avatars": [],
+            "difficulty": 2,
+            "jdversion": 2021
+        }, {
+            "id": "Farfalle",
+            "artist": "sangiovanni",
+            "name": "farfalle",
+            "coaches": 1,
+            "status": "QC_VERIFIED",
+            "avatars": [],
+            "difficulty": 3,
+            "jdversion": 2023
+        }, {
+            "id": "ILoveItALT",
+            "artist": "Icona Pop feat. Charli XCX",
+            "name": "I Love It",
+            "locid": 8023,
+            "coaches": 2,
+            "status": "QC_VERIFIED",
+            "avatars": [],
+            "difficulty": 1,
+            "jdversion": 2015
+        }, {
+            "id": "LevanPolkka",
+            "artist": "Hatsune Miku",
+            "name": "Ievan Polkka",
+			"coaches": 1,
+            "status": "QC_VERIFIED",
+            "avatars": [],
+            "difficulty": 1,
+            "jdversion": 2016
+        }, {
+            "id": "Umbrella",
+            "artist": "Rihanna feat. Jay-Z",
+            "name": "Umbrella",
+            "coaches": 1,
+            "status": "QC_VERIFIED",
+            "avatars": [],
+            "difficulty": 1,
+            "jdversion": 4
+        }
+    ]
+}

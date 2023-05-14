@@ -1,11 +1,11 @@
 /// @description Handle pictogram placing
 if (global.numCoach == 1) {
-	if (x > 610) {
-		x -= 13.85;
+	if (x > 884) {
+		x -= 13.65;
 	}
-	else if (x <= 610) {
+	else if (x <= 884) {
 		// Fix placing
-		x = 606;
+		x = 880;
 		image_alpha -= 0.45;
 		
 		if (image_alpha == 0) {
@@ -16,12 +16,12 @@ if (global.numCoach == 1) {
 	}
 }
 else if (global.numCoach >= 2) {
-	if (x > 590) {
-		x -= 8.665;
+	if (x > 864) {
+		x -= 8.705;
 	}
-	else if (x <= 590) {
+	else if (x <= 864) {
 		// Fix placing
-		x = 586;
+		x = 860;
 		image_alpha -= 0.45;
 		
 		// Destroy itself

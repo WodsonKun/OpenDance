@@ -12,46 +12,21 @@ switch (LANG) {
 	loc_3 = "Por favor, não desligue o computador enquanto o ícone de autosave estiver na tela ou conteúdo será perdido."
 	loc_4 = "Projeto original desenvolvido por WodsonKun"
 	
-	// Tela inicial
-	loc_9 = "Pressione   para fechar o jogo"
-	loc_10 = "Pressione   para iniciar"
-	
+	// Start screen
+	loc_8 = "Pressione  "
+	loc_9 = "  para fechar o jogo"
+	loc_10 = "  para iniciar"
+
 	// Song selection screen
 	loc_11 = "Just Dance "
+	loc_12 = "  Dançar"
+	loc_13 = "  Voltar"
 	
 	/// Versões de músicas
 	// Genéricas / recorrentes
-	loc_8000 = "Versão alternativa"
-	loc_8001 = "Versão extrema"
-	loc_8002 = "Versão On-Stage"
-	loc_8003 = "Versão Sweat"
-	loc_8004 = "Versão sentada"
-	loc_8005 = "Mashup"
-	loc_8006 = "Community Remix"
-	loc_8007 = "Kids"
-	loc_8008 = "Double Rumble"
-	loc_8009 = "Just Dance Machine"
-	
-	// Just Dance 3
-	loc_8010 = "Versão \"mãos dadas\""
-	
-	// Just Dance 4
-	loc_8011 = "Versão "
-	loc_8012 = "Com uma katana"
-	loc_8013 = "Com um guarda-chuva"
-	
-	// Just Dance 2014
-	loc_8014 = "Coreografia oficial"
-	loc_8015 = "Versão para 6 jogadores"
-	loc_8016 = "Com uma cadeira"
-	loc_8017 = "Versão Charleston"
-	loc_8018 = "Versão Sumo"
+	loc_4294967295 = ""
+	loc_12631 = "Versão extrema"
 	
 	// Just Dance 2015
-	loc_8019 = "Dança Africana"
-	loc_8020 = "Versão Bollywood"
-	loc_8021 = "Versão "
-	loc_8022 = "Versão fitness"
-	loc_8023 = "Dança dos guardas"
-	loc_8024 = "Versão \"Old School\""
+	loc_11627 = "Dança dos guardas"
 }

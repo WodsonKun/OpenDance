@@ -49,7 +49,18 @@ for (i = i_start; i < array_length_1d(songsArray); i++) {
 	// Draw the song names
 	draw_set_font(_tfn_justdance_bold_16);
 	if (!sprite_exists(global.publishedSongLogo[i]) && (array_length_1d(songsArray) > 0)) {
-		draw_text(44 + offset + (320 + 20) * i, 460 + 160 + 20, global.publishedSongTitle[i]);
+		if (global.publishedSongLocID[i] == loc_4294967295) {
+			draw_text(44 + offset + (320 + 20) * i, 460 + 160 + 20, global.publishedSongTitle[i]);
+		}
+		else {
+			_name = global.publishedSongTitle[i];
+			_locid = global.publishedSongLocID[i];
+			if (string_length(_name) > 8) {
+				draw_text(44 + offset + (320 + 20) * i, 460 + 160 + 20, _name + " - " + string_copy(_locid, 0, 12) + "...");
+			} else {
+				draw_text(44 + offset + (320 + 20) * i, 460 + 160 + 20, _name + " - " + _locid);
+			}
+		}
 	}
 	else {
 	}
@@ -82,8 +93,13 @@ draw_set_font(_tfn_justdance_regular_12);
 // Draw the "Just Dance" version
 draw_text(38, 370, loc_11 + string(publishedSongJDVersion[select_index]));
 
+// Draw the artist name BG
+draw_set_alpha(0.45);
+draw_roundrect_color_ext(32, 382, string_width(global.publishedSongArtist[select_index]) + 68, 422, 16, 16, make_color_rgb(47, 60, 99), make_color_rgb(47, 60, 99), false);
+draw_roundrect_color_ext(34, 384, string_width(global.publishedSongArtist[select_index]) + 66, 420, 16, 16, make_color_rgb(34, 49, 89), make_color_rgb(34, 49, 89), false);
+
 // Draw the artist name
-draw_sprite_ext(_ui_artistname_bg, 0, 32, 382, 0.65, 0.65, 0, c_white, 0.620);
+draw_set_alpha(1);
 draw_text(52, 406, global.publishedSongArtist[select_index]);
 
 // Draw the engine name

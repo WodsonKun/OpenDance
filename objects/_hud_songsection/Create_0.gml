@@ -3,8 +3,14 @@
 load_locid();
 coverflow_surf = -1
 
+// Animation
+minZoom = 0.1;
+currentZoom = 0.1;
+currentZoom1 = 0.3;
+currentZoom2 = 0.5;
+
 // Read "published.json"
-publishedSongData = import_json("published.json", json_parse);
+publishedSongData = import_json("opendance_data\\config\\published.json", json_parse);
 
 // Load array of songs
 songsArray = publishedSongData.songs
@@ -13,7 +19,7 @@ songsArray = publishedSongData.songs
 global.publishedSongTitle = [];
 global.publishedSongArtist = [];
 publishedSongID = [];
-publishedSongLocID = [];
+global.publishedSongLocID = [];
 publishedSongJDVersion = [];
 publishedBeats = [];
 
@@ -36,6 +42,7 @@ for(songIndex = 0; songIndex < array_length_1d(songsArray); songIndex += 1)
 	global.publishedSongArtist[songIndex] = songsArray[songIndex].artist
 	publishedSongID[songIndex] = songsArray[songIndex].id
 	publishedSongJDVersion[songIndex] = songsArray[songIndex].jdversion
+	global.publishedSongLocID[songIndex] = songsArray[songIndex].locid
 	/*
 	if (is_array(songsArray[songIndex].beats)) {
 		publishedBeats[songIndex] = songsArray[songIndex].beats
@@ -44,16 +51,16 @@ for(songIndex = 0; songIndex < array_length_1d(songsArray); songIndex += 1)
 	}*/
 	
 	// Gets the cover file
-	if (file_exists(songsArray[songIndex].id + "\\" + string_lower(songsArray[songIndex].id) + "_cover@2x.jpg")) {
-		global.publishedSongCover[songIndex] = songsArray[songIndex].id + "\\" + string_lower(songsArray[songIndex].id) + "_cover@2x.jpg";
+	if (file_exists("opendance_data\\maps\\" + songsArray[songIndex].id + "\\" + string_lower(songsArray[songIndex].id) + "_cover@2x.jpg")) {
+		global.publishedSongCover[songIndex] = "opendance_data\\maps\\" + songsArray[songIndex].id + "\\" + string_lower(songsArray[songIndex].id) + "_cover@2x.jpg";
 		global.publishedSongCover[songIndex] = sprite_add(global.publishedSongCover[songIndex], 0, false, false, 0, 0);
 	} else {
 		global.publishedSongCover[songIndex] = _pch_cover1024;
 	}
 
 	// Gets the albumcoach file
-	if (file_exists(songsArray[songIndex].id + "\\" + string_lower(songsArray[songIndex].id) + "_cover_albumcoach.png")) {
-		global.publishedSongAlbumcoach[songIndex] = songsArray[songIndex].id + "\\" + string_lower(songsArray[songIndex].id) + "_cover_albumcoach.png";
+	if (file_exists("opendance_data\\maps\\" + songsArray[songIndex].id + "\\" + string_lower(songsArray[songIndex].id) + "_cover_albumcoach.png")) {
+		global.publishedSongAlbumcoach[songIndex] = "opendance_data\\maps\\" + songsArray[songIndex].id + "\\" + string_lower(songsArray[songIndex].id) + "_cover_albumcoach.png";
 		global.publishedSongAlbumcoach[songIndex] = sprite_add(global.publishedSongAlbumcoach[songIndex], 0, false, false, 0, 0)
 	}
 	else {
@@ -61,8 +68,8 @@ for(songIndex = 0; songIndex < array_length_1d(songsArray); songIndex += 1)
 	}
 	
 	// Gets the logo file
-	if (file_exists(songsArray[songIndex].id + "\\" + string_lower(songsArray[songIndex].id) + "_logo.png")) {
-		global.publishedSongLogo[songIndex] = songsArray[songIndex].id + "\\" + string_lower(songsArray[songIndex].id) + "_logo.png";
+	if (file_exists("opendance_data\\maps\\" + songsArray[songIndex].id + "\\" + string_lower(songsArray[songIndex].id) + "_logo.png")) {
+		global.publishedSongLogo[songIndex] = "opendance_data\\maps\\" + songsArray[songIndex].id + "\\" + string_lower(songsArray[songIndex].id) + "_logo.png";
 		global.publishedSongLogo[songIndex] = sprite_add(global.publishedSongLogo[songIndex], 0, false, false, 0, 0)
 	}
 	else {
@@ -70,8 +77,8 @@ for(songIndex = 0; songIndex < array_length_1d(songsArray); songIndex += 1)
 	}
 	
 	// Gets the map_bkg file
-	if (file_exists(songsArray[songIndex].id + "\\" + string_lower(songsArray[songIndex].id) + "_map_bkg.png")) {
-		global.publishedSongMapBKG[songIndex] = songsArray[songIndex].id + "\\" + string_lower(songsArray[songIndex].id) + "_map_bkg.png";
+	if (file_exists("opendance_data\\maps\\" + songsArray[songIndex].id + "\\" + string_lower(songsArray[songIndex].id) + "_map_bkg.png")) {
+		global.publishedSongMapBKG[songIndex] = "opendance_data\\maps\\" + songsArray[songIndex].id + "\\" + string_lower(songsArray[songIndex].id) + "_map_bkg.png";
 		global.publishedSongMapBKG[songIndex] = sprite_add(global.publishedSongMapBKG[songIndex], 0, false, false, 0, 0)
 	}
 	else {
@@ -79,13 +86,12 @@ for(songIndex = 0; songIndex < array_length_1d(songsArray); songIndex += 1)
 	}
 	
 	// Gets the audiopreview file
-	if (file_exists(songsArray[songIndex].id + "\\" + songsArray[songIndex].id + ".ogg")) {
-		global.publishedSongAudioPreview[songIndex] = audio_create_stream(songsArray[songIndex].id + "\\" + songsArray[songIndex].id + ".ogg");
+	if (file_exists("opendance_data\\maps\\" + songsArray[songIndex].id + "\\" + songsArray[songIndex].id + ".ogg")) {
+		global.publishedSongAudioPreview[songIndex] = audio_create_stream("opendance_data\\maps\\" + songsArray[songIndex].id + "\\" + songsArray[songIndex].id + ".ogg");
 	}
 	else {
 		global.publishedSongAudioPreview[songIndex] = noone
 	}
-	
 	
 	// Masks the cover
 	songMask = sprite_duplicate(_ui_msk_cover)
@@ -99,6 +105,9 @@ for(songIndex = 0; songIndex < array_length_1d(songsArray); songIndex += 1)
 	sprite_set_alpha_from_sprite(songBKG, mapMask)
 	global.publishedSongMapBKG[songIndex] = songBKG
 };
+
+// Converts locIDs to local locIDs
+loc8_converter();
 
 // Resets songIndex after doing the loop
 songIndex = 0

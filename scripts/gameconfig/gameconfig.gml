@@ -6,9 +6,10 @@
 #macro LANG "enus"
 #macro GAME_WIDTH 854
 #macro PLATFORM "pc"
+#macro MAX_SCORE 13333
 
 // Loads custom values from a settings file
-if (file_exists("settings.ini")) {
+if (file_exists("opendance_data\\config\\settings.ini")) {
 	show_message("Custom settings")
 }
 

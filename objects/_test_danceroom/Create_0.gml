@@ -1,6 +1,9 @@
 /// @description Loads the song JSON, parses its data and initializes the UI and video
+// Stops entirely the menu audio
+audio_stop_sound(_snd_menuambiance);
+
 // Parses the JSON
-mainSongData = import_json(global.SelectedSong + "\\" + global.SelectedSong + ".json", json_parse);
+mainSongData = import_json("opendance_data\\maps\\" + global.SelectedSong + "\\" + global.SelectedSong + ".json", json_parse);
 
 // Defines global variables to store song info
 global.songCodename = mainSongData.MapName
@@ -13,6 +16,8 @@ global.audioPreview = mainSongData.AudioPreview.coverflow.startbeat
 global.beatsArray = mainSongData.beats
 global.lyricsArray = mainSongData.lyrics
 global.pictoArray = mainSongData.pictos
+
+highlightTimer = 0;
 
 /// UI
 /// Beat system
@@ -27,6 +32,7 @@ lyricIndex = 0;
 j = 0;
 k = 0;
 l = 0;
+textSpeed = 1;
 
 // Empty arrays
 currentLineArray = [];
@@ -98,9 +104,9 @@ for (i = 0; i < array_length_1d(global.lyricsArray); i++) {
 // Purely to unlock framerate and maximum performance.
 application_surface_enable(false);
 display_reset(0, false);
-room_speed = 9999;
+room_speed = 60;
 
-v = -1; fname = global.SelectedSong + "\\" + global.SelectedSong + ".webm";
+v = -1; fname = "opendance_data\\maps\\" + global.SelectedSong + "\\" + global.SelectedSong + ".webm";
 if (file_exists(fname)) {
   v = video_add(fname);
   video_play(v);
@@ -122,4 +128,6 @@ if (file_exists(fname)) {
 }
 
 // fixes window close button on unix-likes with kwin/kde.
-window_set_size(window_get_width(), window_get_height());
+if (os_type == os_linux) {
+	window_set_size(window_get_width(), window_get_height());
+}

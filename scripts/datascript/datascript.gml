@@ -92,6 +92,7 @@ function make_color_hex(_hex_color) {
 	return make_color_rgb(r, g, b)
 }
 
+/// @function load_locid()
 function load_locid() {
 	// Loads the symbol localization (necessary for buttons)
 	loc8_symb()
@@ -101,28 +102,5 @@ function load_locid() {
 		case ("enus"): loc8_enus(); break;
 		case ("ptbr"): loc8_ptbr(); break;
 		default: loc8_enus(); break;
-	}
-}
-
-// Credits to "Woowoo"
-// https://forum.gamemaker.io/index.php?threads/dealing-with-external-mp3-files.49595/
-function audio_load_mp3(mp3file) {
-	var fname = argument0;
-	var result = 0;
-	if (file_exists(fname)) {
-	    file = file_bin_open(fname, 0);
-	    var size = file_bin_size(file);
-	    var gameTransfer = buffer_create(1024, buffer_grow, 1);
-	    for (var i = 0; i < size; i += 1;) {
-	        buffer_write(gameTransfer, buffer_s16, file_bin_read_byte(file));
-	    }
-	    result = audio_create_buffer_sound(gameTransfer, buffer_u8, 44100, 0, 10, audio_stereo);
-	    file_bin_close(file);
-	}
-	return result;
-	
-	// Shows a message if it wasn't able to get the audio file
-	if (!file_exists(fname)) {
-		show_debug_message("file_open_bin has failed to open the file");
 	}
 }

@@ -1,7 +1,8 @@
 # OpenDance Engine
 OpenDance is a attempt of recreating Ubisoft's **Just Dance Now** engine through **GameMaker Language**
 
-![BOOMBAYAH (from Just Dance 2022), running on OpenDance](https://cdn.discordapp.com/attachments/988130741101658132/1083025751630159902/Imagem_do_WhatsApp_de_2023-03-08_as_10.46.40.jpg)
+![OpenDance's prebuilt song selection menu](https://cdn.discordapp.com/attachments/858712741924962334/1107336854048620634/image.png)
+![Ievan Polkka (from Just Dance 2016), running on OpenDance](https://cdn.discordapp.com/attachments/858712741924962334/1107344870189830194/image.png)
 
 ## Description
 Called "Bluestar Engine", it is made in JavaScript, HTML and CSS, being only used on **Just Dance Now**
@@ -12,14 +13,15 @@ Every piece of code is being written by hand, or ported from Bluestar, or taken 
 
 ## Features
 ### Working features:
-- Reads JSONs from all versions of **Just Dance Now**, including **Just Dance: Vitality School**
+- Reads JSONs from all versions of **Just Dance Now**
 - Displays lyrics and pictograms (80%), still W.I.P.
 - Video playback (through [libWEBMPlayer](https://github.com/time-killer-games/libWebMPlayer))
+- Basic song asset reading for UI
 
 ### To-do stuff:
-- Compatibility with **Just Dance Unlimited** files without converting them to JSONs
+- Include **Just Dance: Vitality School** support
+- Compatibility with **Just Dance Unlimited** files without converting them to JDN-formatted JSONs
 - Compatibility with Chinese, Japanese, Korean and other languages with non-Latin characters
-- UI (yeah, the entire thing)
 
 ## Credits
 ### A huge thanks to:

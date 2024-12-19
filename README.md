@@ -1,5 +1,5 @@
 # OpenDance Engine
-OpenDance is a attempt of recreating Ubisoft's **Just Dance** game engines through **GameMaker Language**
+OpenDance is a attempt of recreating Ubisoft's **Just Dance** gameplay through **GameMaker Language**
 
 ![All About That Bass [BETA] from Just Dance 2015](https://raw.githubusercontent.com/WodsonKun/OpenDance/refs/heads/main/gitassets/aboutthatbassbeta_uaf_opendance.png)
 ![Real Love from Just Dance: Vitality School](https://raw.githubusercontent.com/WodsonKun/OpenDance/refs/heads/main/gitassets/jdcreallove_uaf_opendance.png)
@@ -7,11 +7,16 @@ OpenDance is a attempt of recreating Ubisoft's **Just Dance** game engines throu
 ![Umbrella from Just Dance 4](https://raw.githubusercontent.com/WodsonKun/OpenDance/refs/heads/main/gitassets/umbrella_bluestar_opendance.png)
 
 ## Description
-Called "Bluestar Engine" and "UbiArt Framework", they are made by Ubisoft in order to
+OpenDance aims to recreate Ubisoft's Just Dance gameplay from both **UbiArt Framework** and **Bluestar Engine**, by using **GameMaker Language**.
 
-Every piece of code is being written by hand, or ported from Bluestar, or taken from open-source projects
+Every piece of code is being written by hand or reverse-engineered from said engines
 
-- Please, note that this is being done alone by a amateur developer, so, as expected, this is gonna take a long time before it becomes anything playable
+Note that this is being developed by a single person, and updates can take some time to be done
+
+## Glossary
+UbiArt Framework (or UAF) was a game engine made by Ubisoft and used in several games as Rayman Origins, Rayman Legends, Child of Light and several Just Dance games (from Just Dance 2014 to Just Dance 2022)
+
+Bluestar Engine is a game engine also made by Ubisoft exclusively for web browsers, it is only used on Just Dance Now.
 
 ## Features
 ### Working features:
@@ -31,3 +36,6 @@ Every piece of code is being written by hand, or ported from Bluestar, or taken 
 ### A huge thanks to:
 - [Eliott](https://github.com/MZommer)
 - [Cami](https://github.com/camialtr)
+- [Polyglot](https://github.com/daikon-games/polyglot)
+- [Scribble](https://github.com/JujuAdams/Scribble)
+- [TweenGMX](https://marketplace.gamemaker.io/assets/10871/tweengmx)

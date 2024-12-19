@@ -1,11 +1,13 @@
 # OpenDance Engine
-OpenDance is a attempt of recreating Ubisoft's **Just Dance Now** engine through **GameMaker Language**
+OpenDance is a attempt of recreating Ubisoft's **Just Dance** game engines through **GameMaker Language**
 
-![OpenDance's prebuilt song selection menu](https://cdn.discordapp.com/attachments/858712741924962334/1107336854048620634/image.png)
-![Ievan Polkka (from Just Dance 2016), running on OpenDance](https://cdn.discordapp.com/attachments/858712741924962334/1107344870189830194/image.png)
+![All About That Bass [BETA] from Just Dance 2015](https://raw.githubusercontent.com/WodsonKun/OpenDance/refs/heads/main/gitassets/aboutthatbassbeta_uaf_opendance.png)
+![Real Love from Just Dance: Vitality School](https://raw.githubusercontent.com/WodsonKun/OpenDance/refs/heads/main/gitassets/jdcreallove_uaf_opendance.png)
+![Acerola Taiso no Uta from Just Dance Wii U](https://raw.githubusercontent.com/WodsonKun/OpenDance/refs/heads/main/gitassets/acerolaexercise_uaf_opendance.png)
+![Umbrella from Just Dance 4](https://raw.githubusercontent.com/WodsonKun/OpenDance/refs/heads/main/gitassets/umbrella_bluestar_opendance.png)
 
 ## Description
-Called "Bluestar Engine", it is made in JavaScript, HTML and CSS, being only used on **Just Dance Now**
+Called "Bluestar Engine" and "UbiArt Framework", they are made by Ubisoft in order to
 
 Every piece of code is being written by hand, or ported from Bluestar, or taken from open-source projects
 
@@ -13,16 +15,19 @@ Every piece of code is being written by hand, or ported from Bluestar, or taken 
 
 ## Features
 ### Working features:
-- Reads JSONs from all versions of **Just Dance Now**
-- Displays lyrics and pictograms (80%), still W.I.P.
-- Video playback (through [libWEBMPlayer](https://github.com/time-killer-games/libWebMPlayer))
-- Basic song asset reading for UI
+- Works with files from both Bluestar Engine (JSON) and UbiArt Framework (CKD), retaining the same file structure from UbiArt for easier use.
+- Video and audio playback
+- KaraokeClip, PictogramClip and GoldMoveEffectClip
 
 ### To-do stuff:
-- Include **Just Dance: Vitality School** support
-- Compatibility with **Just Dance Unlimited** files without converting them to JDN-formatted JSONs
-- Compatibility with Chinese, Japanese, Korean and other languages with non-Latin characters
+- Include **Just Dance: Vitality School** (BeatsPreview JSON) support
+- Compatibility with non-Latin characters
+- MoveSpace scoring system (using MSM files and Controller / DSU)
+- Camera scoring system (using GESTURE files and Kinect)
+- Include MainSequence (UbiArt) suport
+- Improve timing system
 
 ## Credits
 ### A huge thanks to:
-[libWEBMPlayer](https://github.com/time-killer-games/libWebMPlayer) by [Samuel Venable](https://github.com/time-killer-games) and [Nikita Krapivin](https://github.com/nkrapivin)
+- [Eliott](https://github.com/MZommer)
+- [Cami](https://github.com/camialtr)

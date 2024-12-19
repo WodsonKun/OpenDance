@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"animation_functions",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"animation_functions",
+  "parent":{
+    "name":"animations",
+    "path":"folders/animations.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

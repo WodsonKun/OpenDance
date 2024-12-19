@@ -1,0 +1,25 @@
+{
+  "$GMSound":"",
+  "%Name":"_sfx_goldmove",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "bitRate":128,
+  "compression":0,
+  "conversionMode":0,
+  "duration":4.344812,
+  "name":"_sfx_goldmove",
+  "parent":{
+    "name":"ui",
+    "path":"folders/audio/ui.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":48000,
+  "soundFile":"_sfx_goldmove.ogg",
+  "type":1,
+  "volume":1.0,
+}

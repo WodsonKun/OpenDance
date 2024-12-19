@@ -1,0 +1,12 @@
+{
+  "$GMShader":"",
+  "%Name":"_yuv_videoshader",
+  "name":"_yuv_videoshader",
+  "parent":{
+    "name":"enginedata",
+    "path":"folders/enginedata.yy",
+  },
+  "resourceType":"GMShader",
+  "resourceVersion":"2.0",
+  "type":1,
+}

@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"font_functions",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"font_functions",
+  "parent":{
+    "name":"enginedata",
+    "path":"folders/enginedata.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

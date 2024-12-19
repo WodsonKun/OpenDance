@@ -1,0 +1,74 @@
+{
+    "songs": [{
+            "id": "AboutThatBass",
+            "artist": "Meghan Trainor",
+            "name": "All About That Bass",
+            "coaches": 1,
+            "songtype": "ubiart",
+            "status": "QC_VERIFIED",
+            "avatars": [],
+            "difficulty": 1,
+            "jdversion": 2015
+        }, {
+            "id": "AcerolaExercise",
+            "artist": "Acerola Taisō no Uta (アセロラ体操のうた)",
+            "name": "Humbert Humbert",
+            "coaches": 2,
+            "songtype": "ubiart",
+            "status": "QC_VERIFIED",
+            "avatars": [],
+            "difficulty": 1,
+            "jdversion": 4514
+        }, {
+            "id": "ClubCantHandleMe",
+            "artist": "Flo Rida",
+            "name": "Club Can't Handle Me",
+            "coaches": 1,
+            "songtype": "ubiart",
+            "status": "QC_VERIFIED",
+            "avatars": [],
+            "difficulty": 2,
+            "jdversion": 2014
+        }, {
+            "id": "Diggin",
+            "artist": "Stephanie Heinzmann",
+            "name": "Diggin' In The Dirt",
+            "coaches": 1,
+            "songtype": "ubiart",
+            "status": "QC_VERIFIED",
+            "avatars": [],
+            "difficulty": 2,
+            "jdversion": 4
+        }, {
+            "id": "ManDown",
+            "artist": "Rihanna",
+            "name": "Man Down",
+            "coaches": 1,
+            "songtype": "ubiart",
+            "status": "QC_VERIFIED",
+            "avatars": [],
+            "difficulty": 2,
+            "jdversion": 2014
+        }, {
+            "id": "JDCRealLove",
+            "artist": "Chris Lee",
+            "name": "Real Love",
+            "coaches": 1,
+            "songtype": "ubiart",
+            "status": "QC_VERIFIED",
+            "avatars": [],
+            "difficulty": 2,
+            "jdversion": 4514
+        }, {
+            "id": "Umbrella",
+            "artist": "Rihanna feat. Jay-Z",
+            "name": "Umbrella",
+            "coaches": 1,
+            "songtype": "bluestar",
+            "status": "QC_VERIFIED",
+            "avatars": [],
+            "difficulty": 1,
+            "jdversion": 4
+        }
+    ]
+}

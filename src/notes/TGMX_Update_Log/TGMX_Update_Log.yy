@@ -1,0 +1,11 @@
+{
+  "$GMNotes":"",
+  "%Name":"TGMX_Update_Log",
+  "name":"TGMX_Update_Log",
+  "parent":{
+    "name":"Docs",
+    "path":"folders/enginedata/extensions/TweenGMX/Docs.yy",
+  },
+  "resourceType":"GMNotes",
+  "resourceVersion":"2.0",
+}

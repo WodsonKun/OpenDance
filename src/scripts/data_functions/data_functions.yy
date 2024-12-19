@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"data_functions",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"data_functions",
+  "parent":{
+    "name":"enginedata",
+    "path":"folders/enginedata.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

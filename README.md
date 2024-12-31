@@ -6,6 +6,9 @@ OpenDance is a attempt of recreating Ubisoft's **Just Dance** gameplay through *
 ![Acerola Taiso no Uta from Just Dance Wii U](https://raw.githubusercontent.com/WodsonKun/OpenDance/refs/heads/main/gitassets/acerolaexercise_uaf_opendance.png)
 ![Umbrella from Just Dance 4](https://raw.githubusercontent.com/WodsonKun/OpenDance/refs/heads/main/gitassets/umbrella_bluestar_opendance.png)
 
+## Showcase
+[![All About That Bass [BETA Version] | Engine Showcase](https://img.youtube.com/vi/y87H3icsFrc/maxresdefault.jpg)](https://www.youtube.com/watch?v=y87H3icsFrc)
+
 ## Description
 OpenDance aims to recreate Ubisoft's Just Dance gameplay from both **UbiArt Framework** and **Bluestar Engine**, by using **GameMaker Language**.
 

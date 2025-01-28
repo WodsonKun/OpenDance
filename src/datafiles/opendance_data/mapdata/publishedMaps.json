@@ -1,74 +1,168 @@
 {
-    "songs": [{
+    "playlists": [{
+            "name": "OpenDance Engine | Beta Songs",
+            "songs": [{
+                    "id": "AboutThatBass"
+                }, {
+                    "id": "CallOnMe"
+                }, {
+                    "id": "ClubCantHandleMe"
+                }, {
+                    "id": "AlbatraozBETA"
+                }, {
+                    "id": "ManDown"
+                }, {
+                    "id": "JDCRealLove"
+                }
+            ]
+        }, {
+            "name": "OpenDance Engine | Released Songs",
+            "songs": [{
+                    "id": "AcerolaExercise"
+                }, {
+                    "id": "Centuries"
+                }, {
+                    "id": "Diggin"
+                }, {
+                    "id": "Sun"
+                }, {
+                    "id": "Umbrella"
+                }
+            ]
+        }
+    ],
+	"songs": [{
             "id": "AboutThatBass",
-            "artist": "Meghan Trainor",
+            "artist": ["Meghan Trainor"],
             "name": "All About That Bass",
             "coaches": 1,
             "songtype": "ubiart",
+            "haslogo": false,
             "status": "QC_VERIFIED",
             "avatars": [],
             "difficulty": 1,
-            "jdversion": 2015
+            "effort": 1,
+            "jdversion": "2015"
         }, {
             "id": "AcerolaExercise",
-            "artist": "Acerola Taisō no Uta (アセロラ体操のうた)",
-            "name": "Humbert Humbert",
+            "artist": ["Humbert Humbert"],
+            "name": "Acerola Taisō no Uta (アセロラ体操のうた)",
             "coaches": 2,
             "songtype": "ubiart",
+            "haslogo": false,
             "status": "QC_VERIFIED",
             "avatars": [],
-            "difficulty": 1,
-            "jdversion": 4514
+            "difficulty": 2,
+            "effort": 1,
+            "jdversion": "Wii U"
+        }, {
+            "id": "CallOnMe",
+            "artist": ["Eric Prydz"],
+            "name": "Call On Me",
+            "coaches": 1,
+            "songtype": "ubiart",
+            "haslogo": false,
+            "status": "QC_VERIFIED",
+            "avatars": [],
+            "difficulty": 2,
+            "effort": 3,
+            "jdversion": "2022"
+        }, {
+            "id": "Centuries",
+            "artist": ["Fall Out Boy"],
+            "name": "Centuries",
+            "coaches": 1,
+            "songtype": "ubiart",
+            "haslogo": true,
+            "status": "QC_VERIFIED",
+            "avatars": [],
+            "difficulty": 3,
+            "effort": 2,
+            "jdversion": "VR: Welcome to Dancity"
         }, {
             "id": "ClubCantHandleMe",
-            "artist": "Flo Rida",
+            "artist": ["Flo Rida", "David Guetta"],
             "name": "Club Can't Handle Me",
             "coaches": 1,
             "songtype": "ubiart",
+            "haslogo": false,
             "status": "QC_VERIFIED",
             "avatars": [],
-            "difficulty": 2,
-            "jdversion": 2014
+            "difficulty": 3,
+            "effort": 2,
+            "jdversion": "2014"
         }, {
             "id": "Diggin",
-            "artist": "Stephanie Heinzmann",
+            "artist": ["Stephanie Heinzmann"],
             "name": "Diggin' In The Dirt",
             "coaches": 1,
             "songtype": "ubiart",
-            "status": "QC_VERIFIED",
-            "avatars": [],
-            "difficulty": 2,
-            "jdversion": 4
-        }, {
-            "id": "ManDown",
-            "artist": "Rihanna",
-            "name": "Man Down",
-            "coaches": 1,
-            "songtype": "ubiart",
-            "status": "QC_VERIFIED",
-            "avatars": [],
-            "difficulty": 2,
-            "jdversion": 2014
-        }, {
-            "id": "JDCRealLove",
-            "artist": "Chris Lee",
-            "name": "Real Love",
-            "coaches": 1,
-            "songtype": "ubiart",
-            "status": "QC_VERIFIED",
-            "avatars": [],
-            "difficulty": 2,
-            "jdversion": 4514
-        }, {
-            "id": "Umbrella",
-            "artist": "Rihanna feat. Jay-Z",
-            "name": "Umbrella",
-            "coaches": 1,
-            "songtype": "bluestar",
+            "haslogo": false,
             "status": "QC_VERIFIED",
             "avatars": [],
             "difficulty": 1,
-            "jdversion": 4
+            "effort": 1,
+            "jdversion": "4"
+        }, {
+            "id": "AlbatraozBETA",
+            "artist": ["AronChupa", "Little Sis Nora"],
+            "name": "I'm An Albatraoz",
+            "coaches": 1,
+            "songtype": "ubiart",
+            "haslogo": false,
+            "status": "QC_VERIFIED",
+            "avatars": [],
+            "difficulty": 3,
+            "effort": 2,
+            "jdversion": "2016"
+        }, {
+            "id": "ManDown",
+            "artist": ["Rihanna"],
+            "name": "Man Down",
+            "coaches": 1,
+            "songtype": "ubiart",
+            "haslogo": false,
+            "status": "QC_VERIFIED",
+            "avatars": [],
+            "difficulty": 2,
+            "effort": 1,
+            "jdversion": "2014"
+        }, {
+            "id": "JDCRealLove",
+            "artist": ["Chris Lee"],
+            "name": "Real Love",
+            "coaches": 1,
+            "songtype": "ubiart",
+            "haslogo": false,
+            "status": "QC_VERIFIED",
+            "avatars": [],
+            "difficulty": 2,
+            "effort": 2,
+            "jdversion": "China"
+        }, {
+            "id": "Sun",
+            "artist": ["Demo"],
+            "name": "Sun",
+            "coaches": 1,
+            "songtype": "ubiart",
+            "haslogo": false,
+            "status": "QC_VERIFIED",
+            "avatars": [],
+            "difficulty": 2,
+            "effort": 2,
+            "jdversion": "2018"
+        }, {
+            "id": "Umbrella",
+            "artist": ["Rihanna", "Jay-Z"],
+            "name": "Umbrella",
+            "coaches": 1,
+            "songtype": "bluestar",
+            "haslogo": false,
+            "status": "QC_VERIFIED",
+            "avatars": [],
+            "difficulty": 1,
+            "effort": 1,
+            "jdversion": "4"
         }
     ]
 }

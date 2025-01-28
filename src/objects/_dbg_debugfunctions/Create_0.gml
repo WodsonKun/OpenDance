@@ -1,4 +1,2 @@
-/// @description Inserir descrição aqui
-// Você pode escrever seu código neste editor
+/// @description [DEBUG] Debug functions
 show_debug_overlay(false);
-texture_prefetch("GoldEffect_TextureGroup");

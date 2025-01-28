@@ -1,0 +1,1 @@
+window_set_caption("OpenDance Engine");

@@ -21,7 +21,7 @@ if (_common_songdata.songNumCoach == 1) {
 } else if (_common_songdata.songNumCoach == 2) {
 	PICTO_SLIDE_TIME = 3300;    // How long pictogram takes to slide in
 } else if (_common_songdata.songNumCoach == 3 || _common_songdata.songNumCoach == 4) {
-	PICTO_SLIDE_TIME = 3000;    // How long pictogram takes to slide in
+	PICTO_SLIDE_TIME = 3400;    // How long pictogram takes to slide in
 }
 PICTO_FADE_TIME = 300;     // How long to fade out
 
@@ -37,7 +37,9 @@ beatPulseTime = 0;
 beatPulseAmount = 0;
 BEAT_PULSE_DURATION = 200;
 GoldMoveIndex = 0;
-global.goldeffect_played = 0;
+ambIndex = 0;
+sfxAMB = NaN;
+ambpath_file = "";
 
 // Active pictograms tracking
 active_pictograms = ds_list_create();

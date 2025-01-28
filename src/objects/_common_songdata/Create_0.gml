@@ -58,6 +58,21 @@ if (global.publishedSongType == "ubiart") {
 		}
 	}
 	
+	// Loads the mainsequence (if the song has one)
+	if (file_exists("opendance_data/mapdata/" + string_lower(global.publishedSongID) + "/cinematics/" + string_lower(global.publishedSongID) + "_mainsequence.tape.ckd")) {
+		ubiartMainsequence = import_json("opendance_data/mapdata/" + string_lower(global.publishedSongID) + "/cinematics/" + string_lower(global.publishedSongID) + "_mainsequence.tape.ckd", json_parse);
+		
+		// Creates the arrays to store shit
+		songSoundSetClipArray = [];
+		songHideUserInterfaceClipArray = [];
+		
+		for (var ClipIndex = 0; ClipIndex < array_length(ubiartMainsequence.Clips); ClipIndex++) {
+			if (ubiartMainsequence.Clips[ClipIndex].__class == "SoundSetClip") {
+				array_push(songSoundSetClipArray, ubiartMainsequence.Clips[ClipIndex]) // Inserts the whole GoldEffectClip inside of the array
+			}
+		}
+	}
+	
 	/// Defines video path
 	global.videoPath = "opendance_data/mapdata/" + global.publishedSongID + "/videoscoach/" + string_lower(global.publishedSongID) + ".webm"
 	global.audioPath = "opendance_data/mapdata/" + global.publishedSongID + "/audio/" + string_lower(global.publishedSongID) + ".ogg"
@@ -87,4 +102,4 @@ else if (global.publishedSongType == "bluestar") {
 instance_create_depth(0, 0, 0, _common_mediamanager);
 instance_create_depth(0, 0, -2, _ui_karaokemanager);
 instance_create_depth(0, 0, -2, _ui_dancemanager);
-window_set_caption("OpenDance | " + songName + " by " + songArtist)
+window_set_caption("OpenDance Engine | " + songName + " by " + songArtist);

@@ -1,14 +1,17 @@
 {
 	"0": "OpenDance",
 	"1": "Just Dance",
-	"2": "Aviso: leia antes de jogar"
-	"3": "Um pequeno percentual de pessoas pode experienciar ataques epiléticos quando expostos a certos padrões de luz\nou luzes piscantes. Exposição a certos padrões ou fundos em uma tela de computador, ou enquanto jogando videogames,\npodem induzir um ataque epilético nesses mesmos indivíduos. Certas situações podem induzir sintomas epiléticos não detectados\n anteriormente mesmo em pessoas sem histórico de ataques ou epilepsia. Se você ou alguém na sua família, tem\n uma condição epilética, consulte seu psiquiatra antes de jogar. Se você sentir qualquer um destes sintomas\n enquanto estiver jogando - tontura, visão turva, espasmos, perda de consciência, \n perca de orientação, qualquer movimento involuntário ou convulsões - IMEDIATAMENTE encerre o uso e consulte seu\n psiquiatra antes de voltar a jogar."
-	"4": "Este projeto utiliza arquivos oficiais dos jogos \"Just Dance\", desenvolvido pela Ubisoft\nProcure e insira os arquivos por conta própria"
-	"5": "Por favor, não desligue o computador enquanto o ícone de autosave estiver na tela ou conteúdo será perdido."
+	"2": "Aviso: leia antes de jogar",
+	"3": "Um pequeno percentual de pessoas pode experienciar ataques epiléticos quando expostos a certos padrões de luz\nou luzes piscantes. Exposição a certos padrões ou fundos em uma tela de computador, ou enquanto jogando videogames,\npodem induzir um ataque epilético nesses mesmos indivíduos. Certas situações podem induzir sintomas epiléticos não detectados\n anteriormente mesmo em pessoas sem histórico de ataques ou epilepsia. Se você ou alguém na sua família, tem\n uma condição epilética, consulte seu psiquiatra antes de jogar. Se você sentir qualquer um destes sintomas\n enquanto estiver jogando - tontura, visão turva, espasmos, perda de consciência, \n perca de orientação, qualquer movimento involuntário ou convulsões - IMEDIATAMENTE encerre o uso e consulte seu\n psiquiatra antes de voltar a jogar.",
+	"4": "Este projeto utiliza arquivos oficiais dos jogos \"Just Dance\", desenvolvido pela Ubisoft\nProcure e insira os arquivos por conta própria",
+	"5": "Por favor, não desligue o computador enquanto o ícone de autosave estiver na tela ou conteúdo será perdido.",
 	"6": "Projeto original desenvolvido por WodsonKun",
 	"7": "Voltar",
 	"8": "Entrar",
 	"9": "Continuar",
+	"10": "Dificuldade",
+	"11": "Nº de coaches",
+	"12": "Esforço",
 	"999": "Kids",
 	"1000": "Fácil",
 	"1001": "Médio",

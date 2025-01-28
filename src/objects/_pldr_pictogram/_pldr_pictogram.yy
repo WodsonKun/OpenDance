@@ -32,10 +32,7 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":{
-    "name":"_placeholderpicto",
-    "path":"sprites/_placeholderpicto/_placeholderpicto.yy",
-  },
+  "spriteId":null,
   "spriteMaskId":null,
   "visible":true,
 }

@@ -39,7 +39,7 @@ function _loadStringData() {
 		
 		_stringData = json_parse(data);
 	} else {
-		throw "Language file: " + "opendance_data/localisationdata//" + _currLocale + ".json could not be read or does not exist";
+		throw "Language file: " + "opendance_data/localisationdata/" + _currLocale + ".json could not be read or does not exist";
 	}
 }
 

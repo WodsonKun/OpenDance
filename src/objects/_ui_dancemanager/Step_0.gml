@@ -49,16 +49,57 @@ if (cleaned_count > 0) {
 if (global.publishedSongType == "ubiart") {
 	if (array_length(_common_songdata.songGoldEffectArray) > 0 && GoldMoveIndex < array_length(_common_songdata.songGoldEffectArray)) {
         var actual_time = _common_mediamanager.timer;
-		var goldMoveStartTime = markerClipToStartTimeMS(_common_songdata.songGoldEffectArray[GoldMoveIndex].StartTime, _common_songdata.songBeatsArray);
-		var goldMoveSpawnTime = goldMoveStartTime + (1000); //Animation speed (0.4) * number of frames (65) (minus 200ms of margin error)
-		global.goldeffect_played = 0;
-		if (actual_time >= goldMoveSpawnTime && global.goldeffect_played == 0) {
-		    instance_create_depth(0, 0, -1, _fx_goldmove);
+		var goldMoveChargeSpawnTime = markerClipToStartTimeMS(_common_songdata.songGoldEffectArray[GoldMoveIndex].StartTime, _common_songdata.songBeatsArray) + (1000); //Animation speed (0.4) * number of frames (65) (minus 200ms of margin error)
+		var goldMoveExplodeSpawnTime = markerToMS(_common_songdata.songGoldEffectArray[GoldMoveIndex].StartTime + 24, _common_songdata.songBeatsArray) + (1000)
+        
+        global.goldeffect_played = 0;
+		if (actual_time >= goldMoveExplodeSpawnTime && global.goldeffect_played == 0) {
+		    instance_create_depth(0, 0, -1, _fx_goldmove_explode);
 			audio_play_sfx(_sfx_goldmove);
 		    GoldMoveIndex++; // Increment only when the effect is played
 		    show_debug_message("Effect triggered.");
 		}
 	}
+}
+
+// Handles AMBs
+if (global.publishedSongType == "ubiart") {
+    if (file_exists("opendance_data/mapdata/" + string_lower(global.publishedSongID) + "/cinematics/" + string_lower(global.publishedSongID) + "_mainsequence.tape.ckd")) {
+        if (array_length(_common_songdata.songSoundSetClipArray) > 0 && ambIndex < array_length(_common_songdata.songSoundSetClipArray)) {
+            var actual_time = _common_mediamanager.timer;
+            
+            // Fixes and gets the file path of the AMB ogg file
+            ambpath = _common_songdata.songSoundSetClipArray[ambIndex].SoundSetPath
+            ambpath = string_replace(ambpath, ".tpl", ".ogg");
+            ambpath = string_replace(ambpath, "/jd5/", "/maps/");
+            ambpath = string_replace(ambpath, "/jd2015/", "/maps/");
+            ambpath_file = string_replace(ambpath, "world/maps/" + string_lower(global.publishedSongID) + "/audio/amb/", "");
+            ambpath = "opendance_data/mapdata/" + global.publishedSongID + "/audio/amb/" + ambpath_file
+            // Checks if the audio exists
+            if (file_exists(ambpath)) {
+                // Fixes the offsync AMB issue
+                if (sign(_common_songdata.songSoundSetClipArray[ambIndex].StartTime) = -1) {
+                    var ambTime = audioOffset + ((_common_songdata.songSoundSetClipArray[ambIndex].StartTime) / 53) * 1000
+                }
+                else if (sign(_common_songdata.songSoundSetClipArray[ambIndex].StartTime) = 1) {
+                    var ambTime = audioOffset + ((_common_songdata.songSoundSetClipArray[ambIndex].StartTime) / 50.5) * 1000
+                }
+                
+                // Plays the AMB 
+                if (actual_time >= ambTime) {
+                    sfxAMB = audio_create_stream(ambpath);
+                    audio_play_sfx(sfxAMB);
+                    ambIndex++; // Increment only when the effect is played
+                    show_debug_message("AMB played: " + string(ambpath_file)); 
+               }
+            }
+        }
+        
+        // Cleans the AMB from the memory
+        if audio_exists(sfxAMB) && !audio_is_playing(sfxAMB) {
+            audio_destroy_stream(sfxAMB);
+        }
+    }
 }
 
 // Handle pictogram spawning
@@ -89,6 +130,7 @@ if (global.publishedSongType == "ubiart") {
 			picto_path = currentPicto.PictoPath
             picto_path = string_replace(picto_path, ".tga", ".png"); // Checks for TGA paths and rename them to PNG paths
 			picto_path = string_replace(picto_path, "/jd5/", "/maps/"); // Checks for JD5 paths and rename them to MAPS paths
+			picto_path = string_replace(picto_path, "/jd2015/", "/maps/"); // Checks for JD2015 paths and rename them to MAPS paths
             picto_path = string_replace(picto_path, "world/maps/" + string_lower(global.publishedSongID) + "/timeline/pictos/", "");
 			picto_path = "opendance_data/mapdata/" + global.publishedSongID + "/timeline/pictos/" + picto_path
             picto.picto_sprite = sprite_add(picto_path, 0, false, true, 0, 0);

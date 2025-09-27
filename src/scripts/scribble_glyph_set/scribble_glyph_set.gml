@@ -3,7 +3,7 @@
 /// 
 /// Returns: The new value of the property that was modified.
 /// @param fontName           The target font, as a string
-/// @param character          Target character, as a string
+/// @param character          Target character, as a string. You may use the GameMaker constant `all` to adjust all characters in a font
 /// @param property           Property to return, see below
 /// @param value              The value to set
 /// @param [relative=false]   Whether to add the new value to the existing value, or to overwrite the existing value. Defaults to false, overwriting the existing value
@@ -55,7 +55,7 @@ function scribble_glyph_set(_font, _character, _property, _value, _relative = fa
         if ((_property == SCRIBBLE_GLYPH.HEIGHT) || (_property == SCRIBBLE_GLYPH.FONT_HEIGHT))
         {
             ds_grid_set_region(_grid, 0, SCRIBBLE_GLYPH.FONT_HEIGHT, ds_grid_width(_grid)-1, SCRIBBLE_GLYPH.FONT_HEIGHT, _grid[# _glyph_index, SCRIBBLE_GLYPH.FONT_HEIGHT]);
-            _font_data.__calculate_font_height();
+            _font_data.__height = _grid[# _glyph_index, SCRIBBLE_GLYPH.FONT_HEIGHT];
         }
     }
     else
@@ -86,7 +86,7 @@ function scribble_glyph_set(_font, _character, _property, _value, _relative = fa
             if ((_property == SCRIBBLE_GLYPH.HEIGHT) || (_property == SCRIBBLE_GLYPH.FONT_HEIGHT))
             {
                 ds_grid_set_region(_grid, 0, SCRIBBLE_GLYPH.FONT_HEIGHT, ds_grid_width(_grid)-1, SCRIBBLE_GLYPH.FONT_HEIGHT, _new_value);
-                _font_data.__calculate_font_height();
+                _font_data.__height = _new_value;
             }
         }
         

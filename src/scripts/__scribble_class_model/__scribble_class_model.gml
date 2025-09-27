@@ -4,9 +4,9 @@
 
 function __scribble_class_model(_element, _model_cache_name) constructor
 {
-    static __scribble_state    = __scribble_initialize().__state;
-    static __mcache_dict       = __scribble_initialize().__cache_state.__mcache_dict;
-    static __mcache_name_array = __scribble_initialize().__cache_state.__mcache_name_array;
+    static __scribble_state    = __scribble_system().__state;
+    static __mcache_dict       = __scribble_system().__cache_state.__mcache_dict;
+    static __mcache_name_array = __scribble_system().__cache_state.__mcache_name_array;
     
     //Record the start time so we can get a duration later
     if (SCRIBBLE_VERBOSE) var _timer_total = get_timer();
@@ -32,6 +32,10 @@ function __scribble_class_model(_element, _model_cache_name) constructor
     __last_drawn = __scribble_state.__frames;
     __frozen     = undefined;
     __flushed    = false;
+    
+    __allow_text_getter       = _element.__allow_text_getter;
+    __allow_glyph_data_getter = _element.__allow_glyph_data_getter;
+    __allow_line_data_getter  = _element.__allow_line_data_getter;
     
     __pages      = 0;
     __width      = 0;
@@ -86,6 +90,8 @@ function __scribble_class_model(_element, _model_cache_name) constructor
     
     static __flush = function()
     {
+        //Don't forget to update scribble_flush_everything() if you change anything here!
+        
         if (__flushed) return undefined;
         if (__SCRIBBLE_DEBUG) __scribble_trace("Flushing model \"" + string(__cache_name) + "\"");
         
@@ -166,7 +172,7 @@ function __scribble_class_model(_element, _model_cache_name) constructor
     {
         //TODO - Optimize by returning page bounds if the number of characters revealed is the same as the whole page
         
-        if (!SCRIBBLE_ALLOW_GLYPH_DATA_GETTER) __scribble_error("Getting the revealed glyph bounding box requires SCRIBBLE_ALLOW_GLYPH_DATA_GETTER to be set to <true>");
+        if (not __allow_glyph_data_getter) __scribble_error("Getting the revealed glyph bounding box requires either:\n- Call `.allow_glyph_data_getter()` on the element\n- Set `SCRIBBLE_FORCE_GLYPH_DATA_GETTER` to `true`");
         
         var _glyph_grid = __get_glyph_data_grid(_page);
         
@@ -229,16 +235,39 @@ function __scribble_class_model(_element, _model_cache_name) constructor
         if (_page < 0) __scribble_error("Page index ", _page, " doesn't exist. Minimum page index is 0");
         if (_page >= __pages) __scribble_error("Page index ", _page, " doesn't exist. Maximum page index is ", __pages-1);
         
-        if (!SCRIBBLE_ALLOW_TEXT_GETTER) __scribble_error("Cannot get text, SCRIBBLE_ALLOW_TEXT_GETTER = <false>\nPlease set SCRIBBLE_ALLOW_TEXT_GETTER to <true> to get text");
+        if (not __allow_text_getter)
+        {
+            __scribble_error("Getting element text requires either:\n- Call `.allow_text_getter()` on the element\n- Set `SCRIBBLE_FORCE_TEXT_GETTER` to `true`");
+        }
         
         return __pages_array[_page].__text;
     }
     
     /// @param page
+    static __get_line_data = function(_index, _page)
+    {
+        if (_page < 0) __scribble_error("Page index ", _page, " doesn't exist. Minimum page index is 0");
+        if (_page >= __pages) __scribble_error("Page index ", _page, " doesn't exist. Maximum page index is ", __pages-1);
+        
+        if (not __allow_line_data_getter)
+        {
+            __scribble_error("Getting line data requires either:\n- Call `.allow_line_data_getter()` on the element\n- Set `SCRIBBLE_FORCE_LINE_DATA_GETTER` to `true`");
+        }
+        
+        return __pages_array[_page].__get_line_data(_index);
+    }
+    
+    /// @param index
+    /// @param page
     static __get_glyph_data = function(_index, _page)
     {
         if (_page < 0) __scribble_error("Page index ", _page, " doesn't exist. Minimum page index is 0");
         if (_page >= __pages) __scribble_error("Page index ", _page, " doesn't exist. Maximum page index is ", __pages-1);
+        
+        if (not __allow_glyph_data_getter)
+        {
+            __scribble_error("Getting glyph data requires either:\n- Call `.allow_glyph_data_getter()` on the element\n- Set `SCRIBBLE_FORCE_GLYPH_DATA_GETTER` to `true`");
+        }
         
         return __pages_array[_page].__get_glyph_data(_index);
     }
@@ -264,7 +293,7 @@ function __scribble_class_model(_element, _model_cache_name) constructor
         if (_page >= __pages) __scribble_error("Page index ", _page, " doesn't exist. Maximum page index is ", __pages-1);
         
         //N.B. Off by one since we consider the terminating null as a glyph for the purposes of typists
-        return __pages_array[_page].__glyph_count - 1;
+        return __pages_array[_page].__glyph_count-1;
     }
     
     static __get_glyph_data_grid = function(_page)
@@ -272,7 +301,7 @@ function __scribble_class_model(_element, _model_cache_name) constructor
         if (_page < 0) __scribble_error("Page index ", _page, " doesn't exist. Minimum page index is 0");
         if (_page >= __pages) __scribble_error("Page index ", _page, " doesn't exist. Maximum page index is ", __pages-1);
         
-        if (!SCRIBBLE_ALLOW_GLYPH_DATA_GETTER) __scribble_error("Getting glyph data requires SCRIBBLE_ALLOW_GLYPH_DATA_GETTER to be set to <true>");
+        if (not __allow_glyph_data_getter) __scribble_error("Getting glyph data requires either:\n- Call `.allow_glyph_data_getter()` on the element\n- Set `SCRIBBLE_FORCE_GLYPH_DATA_GETTER` to `true`");
         
         return __pages_array[_page].__glyph_grid;
     }
@@ -296,7 +325,7 @@ function __scribble_class_model(_element, _model_cache_name) constructor
         }
     }
     
-    static _generator_state = __scribble_initialize().__generator_state;
+    static _generator_state = __scribble_system().__generator_state;
     with(_generator_state)
     {
         __Reset();
@@ -313,8 +342,9 @@ function __scribble_class_model(_element, _model_cache_name) constructor
     __scribble_gen_6_build_lines();
     __scribble_gen_7_build_pages();
     __scribble_gen_8_position_glyphs();
-    __scribble_gen_9_write_vbuffs();
-    __scribble_gen_10_set_padding_flags();
+    __scribble_gen_9_build_vbuff_grids();
+    __scribble_gen_10_write_vbuffs();
+    __scribble_gen_11_set_padding_flags();
     
     if (SCRIBBLE_VERBOSE)
     {

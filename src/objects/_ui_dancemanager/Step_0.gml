@@ -75,7 +75,8 @@ if (global.publishedSongType == "ubiart") {
             ambpath = string_replace(ambpath, "/jd2015/", "/maps/");
             ambpath_file = string_replace(ambpath, "world/maps/" + string_lower(global.publishedSongID) + "/audio/amb/", "");
             ambpath = "opendance_data/mapdata/" + global.publishedSongID + "/audio/amb/" + ambpath_file
-            // Checks if the audio exists
+            
+			// Checks if the audio exists
             if (file_exists(ambpath)) {
                 // Fixes the offsync AMB issue
                 if (sign(_common_songdata.songSoundSetClipArray[ambIndex].StartTime) = -1) {
@@ -84,7 +85,7 @@ if (global.publishedSongType == "ubiart") {
                 else if (sign(_common_songdata.songSoundSetClipArray[ambIndex].StartTime) = 1) {
                     var ambTime = audioOffset + ((_common_songdata.songSoundSetClipArray[ambIndex].StartTime) / 50.5) * 1000
                 }
-                
+				
                 // Plays the AMB 
                 if (actual_time >= ambTime) {
                     sfxAMB = audio_create_stream(ambpath);
@@ -226,5 +227,101 @@ if (global.publishedSongType == "ubiart") {
             // Move to next pictogram
             currentPictoIndex++;
         }
+    }
+}
+
+// Handle moves
+if (global.publishedSongType == "bluestar") {
+    if (array_length(_common_songdata.bluestarMoves0JSON) > 0 && currentMoveIndex < array_length(_common_songdata.bluestarMoves0JSON)) {
+        currentMove = _common_songdata.bluestarMoves0JSON[currentMoveIndex];
+        moveTime = currentMove.time;
+        
+        // Apply audio offset to sync with music
+        moveTime += audioOffset;
+        
+        // Check if it's time to spawn
+        var actual_time = _common_mediamanager.timer;
+        
+        if (actual_time >= moveTime) {
+            currentMoveData = read_msm_file("opendance_data/mapdata/" + global.publishedSongID + "/timeline/moves/" + currentMove.name + ".msm");
+            
+            // Initialize move scoring variables when a new move starts
+            if (currentMoveData != undefined && currentMoveData.is_valid) {
+                // Store move start time for scoring
+                moveStartTime = actual_time;
+                moveDuration = currentMoveData.duration;
+                moveEndTime = moveStartTime + moveDuration;
+                
+                // Initialize accelerometer data collection for this move
+                currentMoveAccelData = [];
+                
+                show_debug_message("Move started: " + currentMove.name + " Duration: " + string(moveDuration));
+            }
+            
+            // Move to next move
+            currentMoveIndex++;
+        }
+    }
+}
+
+// Collect accelerometer data during active move
+if (currentMoveData != undefined && currentMoveData.is_valid) {
+    
+    // Check if we're within the move time window
+    if (actual_time >= moveStartTime && actual_time <= moveEndTime) {
+        // Collect accelerometer data (replace with your actual accelerometer variables)
+        var accel_reading = {
+            time: actual_time - moveStartTime, // Relative time from move start
+            axisx: _net_accudp.remotex, // Your actual accelerometer X variable
+            axisy: _net_accudp.remotey, // Your actual accelerometer Y variable  
+            axisz: _net_accudp.remotez  // Your actual accelerometer Z variable
+        };
+        
+        array_push(currentMoveAccelData, accel_reading);
+        
+        // Debug: Show data collection progress occasionally
+        if (array_length(currentMoveAccelData) % 60 == 0) { // Every 60 frames
+            show_debug_message("Collecting data... " + string(array_length(currentMoveAccelData)) + " samples");
+            show_debug_message("Current accel: X=" + string(_net_accudp.remotex) + " Y=" + string(_net_accudp.remotey) + " Z=" + string(_net_accudp.remotez));
+        }
+    }
+    
+    // Score the move when it's complete
+    if (actual_time > moveEndTime && array_length(currentMoveAccelData) > 0) {
+        show_debug_message("=== SCORING MOVE ===");
+        show_debug_message("Collected " + string(array_length(currentMoveAccelData)) + " accelerometer samples");
+        show_debug_message("Move duration was: " + string(moveDuration));
+        
+        var move_result = compute_move_score(currentMoveData, currentMoveAccelData, 0.0, moveDuration);
+        
+        // Store or use the result
+        var final_distance = move_result.distance;
+        var final_score = move_result.score;
+        
+        show_debug_message("Move completed: " + currentMove.name);
+        show_debug_message("Score: " + string(final_score) + "% (Distance: " + string(final_distance) + ")");
+        show_debug_message("==================");
+        
+        // TODO: Add your scoring logic here
+        // Examples:
+        // - Add to total score
+        // - Show score popup
+        // - Trigger visual effects based on score
+        // - Update UI elements
+        
+        // Clear move data for next move
+        currentMoveData = undefined;
+        currentMoveAccelData = [];
+        moveStartTime = 0;
+        moveEndTime = 0;
+    } else if (actual_time > moveEndTime && array_length(currentMoveAccelData) == 0) {
+        show_debug_message("ERROR: Move ended but no accelerometer data was collected!");
+        show_debug_message("Move: " + currentMove.name + " Duration: " + string(moveDuration));
+        
+        // Clear move data anyway
+        currentMoveData = undefined;
+        currentMoveAccelData = [];
+        moveStartTime = 0;
+        moveEndTime = 0;
     }
 }

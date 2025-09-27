@@ -32,7 +32,7 @@
   "resourceType":"GMSprite",
   "resourceVersion":"2.0",
   "sequence":{
-    "$GMSequence":"",
+    "$GMSequence":"v1",
     "%Name":"scribble_fallback_bulletpoint",
     "autoRecord":true,
     "backdropHeight":768,

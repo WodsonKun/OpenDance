@@ -3,13 +3,16 @@
 texture_prefetch("GoldEffect_TextureGroup");
 
 // Sets the game speed to 30FPS
-game_set_speed(30, gamespeed_fps);
+//game_set_speed(30, gamespeed_fps);
 
 // [DEBUG] Debug functions
 instance_create_depth(0, 0, 0, _dbg_debugfunctions);
 
 // Initializes the display handler
 instance_create_depth(0, 0, 0, _eng_displayhandler);
+
+// Initializes the UDP connection with the phone (debug)
+instance_create_depth(0, 0, 0, _net_accudp);
 
 // Loads game settings
 if (file_exists("opendance_data/configdata/gameConfig.json")) {

@@ -18,10 +18,9 @@ if (global.publishedSongType == "ubiart") {
         // Gets the right start points for audio and video (as UbiArt does this kind of shit, we have too...) 
         videoOffset = abs(_common_songdata.songVideoStartTime) * 100
     } else {
-        videoOffset = 1;
+        videoOffset = 477.5;
     }
-    
 } else {
-    videoOffset = 1;
+    videoOffset = 0;
     audioOffset = 0;
 }

@@ -223,7 +223,7 @@
     {"lower":32,"upper":255,},
     {"lower":8217,"upper":8217,},
   ],
-  "regenerateBitmap":true,
+  "regenerateBitmap":false,
   "resourceType":"GMFont",
   "resourceVersion":"2.0",
   "sampleText":"\r\ndiego cu sujor\r\nshira do beliche",

@@ -9,8 +9,6 @@ select_index = 0;
 playlist_index = 0;
 offset = 280;
 
-// Loads, masks and unloads the cover images
-
 
 // Loop through every song's JSON and store their basic info inside global arrays
 for(songIndex = 0; songIndex < array_length(publishedSongData.songs); songIndex += 1) {
@@ -39,6 +37,35 @@ for(songIndex = 0; songIndex < array_length(publishedSongData.songs); songIndex 
         // Deletes the duplicated sprites (to avoid memory being consumed for nothing)
         sprite_delete(songCoverBase);
         sprite_delete(songMask);
+	} else {
+		array_push(publishedSongInfo[songIndex], noone);
+	}
+    
+    // Gets the map_bkg file
+	if (file_exists("opendance_data/mapdata/" + publishedSongInfo[songIndex][0] + "/menuart/" + string_lower(publishedSongInfo[songIndex][0]) + "_map_bkg.png")) {
+        
+        // Loads the sprite image
+        songMapBKGBase = sprite_add("opendance_data/mapdata/" + publishedSongInfo[songIndex][0] + "/menuart/" + string_lower(publishedSongInfo[songIndex][0]) + "_map_bkg.png", 0, false, false, 0, 0);
+        
+        // Duplicates the sprites and masks it
+        songMapBKG = sprite_duplicate(songMapBKGBase);
+        songMapMask = sprite_duplicate(_ui_msk_mapbkg);
+        sprite_set_alpha_from_sprite(songMapBKG, songMapMask);
+		
+        // Pushes into the array
+        array_push(publishedSongInfo[songIndex], songMapBKG);
+        
+        // Deletes the duplicated sprites (to avoid memory being consumed for nothing)
+        sprite_delete(songMapBKGBase);
+        sprite_delete(songMapMask);
+	} else {
+		array_push(publishedSongInfo[songIndex], noone);
+	}
+    
+    // Gets the albumcoach file
+	if (file_exists("opendance_data/mapdata/" + publishedSongInfo[songIndex][0] + "/menuart/" + string_lower(publishedSongInfo[songIndex][0]) + "_cover_albumcoach.png")) {
+        // Pushes into the array
+        array_push(publishedSongInfo[songIndex], sprite_add("opendance_data/mapdata/" + publishedSongInfo[songIndex][0] + "/menuart/" + string_lower(publishedSongInfo[songIndex][0]) + "_cover_albumcoach.png", 0, false, false, 0, 0));
 	} else {
 		array_push(publishedSongInfo[songIndex], noone);
 	}

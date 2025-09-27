@@ -3,20 +3,38 @@
 #macro __SCRIBBLE_DEBUG             false
 #macro __SCRIBBLE_VERBOSE_GC        false
 #macro __SCRIBBLE_RUNNING_FROM_IDE  (GM_build_type == "run")
-#macro SCRIBBLE_LOAD_FONTS_ON_BOOT  true
 
 
 
-__scribble_initialize();
-function __scribble_initialize()
+if (SCRIBBLE_INITIALIZE_ON_BOOT)
+{
+    __scribble_system();
+}
+
+function __scribble_system(_calledFromInitialize = false)
 {
     static _system = undefined;
     if (_system != undefined) return _system;
+    
+    if (not SCRIBBLE_INITIALIZE_ON_BOOT)
+    {
+        if (not _calledFromInitialize)
+        {
+            __scribble_error("Scribble is not initialized. You must either:\n- Call `scribble_initialize()` first\n- Set `SCRIBBLE_INITIALIZE_ON_BOOT` to `true`");
+            return;
+        }
+    }
     
     _system = {};
     with(_system)
     {
         __scribble_trace("Welcome to Scribble Deluxe by Juju Adams! This is version " + SCRIBBLE_VERSION + ", " + SCRIBBLE_DATE);
+        
+        //Safety data structures. Theses exist at (hopefully) index 0 so that users can't accidentally
+        //delete important parts of Scribble if they're sloppy with destroy functions.
+        __protection_buffer = buffer_create(1, buffer_fixed, 1);
+        __protection_map    = ds_map_create();
+        __protection_grid   = ds_grid_create(1, 1);
         
         if (SCRIBBLE_VERBOSE)
         {
@@ -60,7 +78,7 @@ function __scribble_initialize()
         __useHandleParse = false;
         try
         {
-            handle_parse(string(__scribble_initialize));
+            handle_parse(string(__scribble_system));
             __useHandleParse = true;
             
             __scribble_trace("Using handle_parse() where possible");
@@ -104,6 +122,11 @@ function __scribble_initialize()
         //Main lookup for fonts
         __font_data_map = ds_map_create();
         
+        //Other caching maps
+        __sprite_texture_index_map    = ds_map_create();
+        __sprite_texture_material_map = ds_map_create();
+        __material_map                = ds_map_create();
+        
         //Multi-use buffers
         __buffer_a = buffer_create(1024, buffer_grow, 1);
         __buffer_b = buffer_create(1024, buffer_grow, 1);
@@ -146,6 +169,9 @@ function __scribble_initialize()
             
             __gc_vbuff_refs: [],
             __gc_vbuff_ids:  [],
+            
+            __gc_grid_refs: [],
+            __gc_grid_ids:  [],
         };
         
         //
@@ -157,7 +183,8 @@ function __scribble_initialize()
         __krutidev_matra_lookup_map = __scribble_krutidev_matra_lookup_map_initialize();
         
         //External sound reference storage
-        __external_sound_map = ds_map_create();
+        __external_sprite_map = ds_map_create();
+        __external_sound_map  = ds_map_create();
         
         //Lookup for user-defined macros
         __macros_map = ds_map_create();
@@ -217,10 +244,37 @@ function __scribble_initialize()
         __effects_slash_map[? "/JITTER" ] = 8;
         __effects_slash_map[? "/BLINK"  ] = 9;
         __effects_slash_map[? "/SLANT"  ] = 10;
+        
+        //Unpack texture group data into an easy-to-use dictionary. This should, of course, just be a native
+        //feature of GameMaker. I, in fact, suggested such a feature (including sprites (and backgrounds!))
+        //back in 2018 when working on The Swords Of Ditto in GameMaker Studio 1.4.
+        __font_to_texture_group_map = ds_map_create();
+        
+        var _tg_name_array = texturegroup_get_names();
+        var _i = 0;
+        repeat(array_length(_tg_name_array))
+        {
+            var _tg_name = _tg_name_array[_i];
+            var _font_index_array = texturegroup_get_fonts(_tg_name);
+            
+            var _j = 0;
+            repeat(array_length(_font_index_array))
+            {
+                __font_to_texture_group_map[? _font_index_array[_j]] = _tg_name;
+                ++_j;
+            }
+            
+            ++_i;
+        }
+    }
+    
+    if (GM_build_type == "run")
+    {
+        global.__Scribble = _system;
     }
     
     scribble_anim_reset();
-    if (SCRIBBLE_LOAD_FONTS_ON_BOOT) __scribble_font_add_all_from_project();
+    __scribble_font_add_all_from_bundle();
     
     return _system;
 }

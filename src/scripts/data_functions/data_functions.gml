@@ -120,49 +120,258 @@ function markerToMS(_marker, _markers) {
 	return ms
 }
 
-/// @function
-function msmReader(_file) {
-	_msmFile = buffer_load(argument[0]); // Opens the MSM and creates a buffer for it
-	
-	// Ignores the first 4 bytes
-	buffer_seek(_msmFile, buffer_seek_start, 4)
-	
-	// Reads the necessary data
-	buffer_seek(_msmFile, buffer_seek_relative, 4)
-	_msmVersion = buffer_read(_msmFile, buffer_u32)
-	
-	
-	
+/// @description process_packet(buffer)
+/// @param buffer
+function process_packet(argument0) {
+	var buffer = argument0;
+	var msg_id = buffer_read(buffer,buffer_u8); // ID
+	var clickx = buffer_read(buffer, buffer_f32); // AxisX
+	var clicky = buffer_read(buffer, buffer_f32); // AxisY
+	var clickz = buffer_read(buffer, buffer_f32); // AxisZ
+    
+	// Updates AxisX, AxisY and AxisZ
+	remotex = clickx;
+	remotey = clicky;
+	remotez = clickz;
 }
-/*
- using BinaryReader reader = new(File.OpenRead(msmFile));
 
-        //Ignores the first 4 bytes
-        reader.ReadBytes(4);
-
-        //Instantiates UbiMoveSpaceMovement and acquired main data from binary file (ONLY VERSION 7 MOVES SUPPORTED)
-        UbiMoveSpaceMovement move = new()
-        {
-            version = BitConverter.ToInt32(ReverseEndianess(reader.ReadBytes(4)), 0),
-            moveName = Encoding.UTF8.GetString(reader.ReadBytes(0x40)).TrimEnd('\0'),
-            mapName = Encoding.UTF8.GetString(reader.ReadBytes(0x40)).TrimEnd('\0'),
-            authorName = Encoding.UTF8.GetString(reader.ReadBytes(0x40)).TrimEnd('\0'),
-            moveDuration = BitConverter.ToSingle(ReverseEndianess(reader.ReadBytes(4)), 0),
-            moveAccurateLowThreshold = BitConverter.ToSingle(ReverseEndianess(reader.ReadBytes(4)), 0),
-            moveAccurateHighThreshold = BitConverter.ToSingle(ReverseEndianess(reader.ReadBytes(4)), 0),
-            autoCorrelationThreshold = BitConverter.ToSingle(ReverseEndianess(reader.ReadBytes(4)), 0),
-            moveDirectionImpactFactor = BitConverter.ToSingle(ReverseEndianess(reader.ReadBytes(4)), 0),
-            moveMeasureBitfield = BitConverter.ToInt64(ReverseEndianess(reader.ReadBytes(8)), 0),
-            measureValue = BitConverter.ToInt32(ReverseEndianess(reader.ReadBytes(4)), 0),
-            measureCount = BitConverter.ToInt32(ReverseEndianess(reader.ReadBytes(4)), 0),
-            energyMeasureCount = BitConverter.ToInt32(ReverseEndianess(reader.ReadBytes(4)), 0),
-            moveCustomizationFlags = BitConverter.ToInt32(ReverseEndianess(reader.ReadBytes(4)), 0),            
-            measures = new List<float>()
-        };
-
-        //Acquires measures data from binary file using a loop
-        while (reader.BaseStream.Position < reader.BaseStream.Length)
-        {
-            move.measures.Add(BitConverter.ToSingle(ReverseEndianess(reader.ReadBytes(4)), 0));
+function read_msm_file(_filename) {
+    if (!file_exists(_filename)) {
+        show_debug_message("MSM file not found: " + _filename);
+        return undefined;
+    }
+    
+    var _buffer = buffer_load(_filename);
+    if (_buffer == -1) {
+        show_debug_message("Failed to load MSM file into buffer");
+        return undefined;
+    }
+    
+    // Create MSM data structure with all required fields
+    var _msm = {
+        // Required fields with default values
+        endianess: 0,
+        version: 0,
+        move_name: "",
+        song_name: "",
+        classifier_type: "",
+        duration: 0,
+        low_threshold: 0,
+        high_threshold: 0,
+        measures: [],
+        is_valid: false,
+        
+        // Additional fields
+        autocorr_threshold: 0,
+        direction_impact: 0,
+        measures_bitfield: 0,
+        custom_flags: 0,
+        measure_value: 0,
+        measure_count: 0,
+        energy_measure_count: 0
+    };
+    
+    try {
+        buffer_seek(_buffer, buffer_seek_start, 0);
+        
+        // Reads the endianess of the MSM
+        _msm.endianess = buffer_read_u32be(_buffer);
+        
+        // Reads the MSM structure
+        if (_msm.endianess == 1) {
+            _msm.version = buffer_read_u32be(_buffer);
+            _msm.move_name = buffer_read_string_fixed(_buffer, 64);
+            _msm.song_name = buffer_read_string_fixed(_buffer, 64);
+            _msm.classifier_type = buffer_read_string_fixed(_buffer, 64);
+            _msm.duration = buffer_read_f32le(_buffer);
+            _msm.low_threshold = buffer_read_f32le(_buffer);
+            _msm.high_threshold = buffer_read_f32le(_buffer);
+            _msm.autocorr_threshold = buffer_read_u32be(_buffer);
+            _msm.direction_impact = buffer_read_f32le(_buffer);
+            _msm.measures_bitfield = buffer_read_u64be(_buffer);
+            _msm.measure_value = buffer_read_u32be(_buffer);
+            _msm.measure_count = buffer_read_u32be(_buffer);
+            _msm.energy_measure_count = buffer_read_u32be(_buffer);
+            _msm.custom_flags = buffer_read(_buffer, buffer_s32);
+            
+            // Read remaining float data
+            while (buffer_tell(_buffer) < buffer_get_size(_buffer) - 4) {
+                var _value = buffer_read_f32le(_buffer);
+                array_push(_msm.measures, _value);
+            }
         }
-*/
+        else {
+            _msm.version = buffer_read_u32be(_buffer);
+            _msm.move_name = buffer_read_string_fixed(_buffer, 64);
+            _msm.song_name = buffer_read_string_fixed(_buffer, 64);
+            _msm.classifier_type = buffer_read_string_fixed(_buffer, 64);
+            _msm.duration = buffer_read_f32be(_buffer);
+            _msm.low_threshold = buffer_read_f32be(_buffer);
+            _msm.high_threshold = buffer_read_f32be(_buffer);
+            _msm.autocorr_threshold = buffer_read_u32be(_buffer);
+            _msm.direction_impact = buffer_read_f32be(_buffer);
+            _msm.measures_bitfield = buffer_read_u64be(_buffer);
+            _msm.measure_value = buffer_read_u32be(_buffer);
+            _msm.measure_count = buffer_read_u32be(_buffer);
+            _msm.energy_measure_count = buffer_read_u32be(_buffer);
+            _msm.custom_flags = buffer_read(_buffer, buffer_s32);
+            
+            // Read remaining float data
+            while (buffer_tell(_buffer) < buffer_get_size(_buffer) - 4) {
+                var _value = buffer_read_f32be(_buffer);
+                array_push(_msm.measures, _value);
+            }
+        }
+        _msm.is_valid = true;
+        
+        //show_message(string(_msm));
+        show_debug_message("Successfully read MSM file" + string(_filename));
+        
+    } catch(e) {
+        show_debug_message("Error reading MSM file: " + string(e));
+        _msm.is_valid = false;
+    }
+    
+    buffer_delete(_buffer);
+    return _msm;
+}
+
+function buffer_read_string_fixed(_buffer, _length) {
+    var _str = "";
+    var _null_found = false;
+    
+    repeat(_length) {
+        var _byte = buffer_read(_buffer, buffer_u8);
+        if (!_null_found && _byte != 0) {
+            _str += chr(_byte);
+        } else {
+            _null_found = true;
+        }
+    }
+    
+    return _str;
+}
+
+/// @function buffer_read_float_be(buffer)
+/// @param buffer The buffer to read from
+/// @returns {real} The float value read from the buffer
+function buffer_read_f32be(buffer) {
+    // Read 4 bytes individually
+    var b1 = buffer_read(buffer, buffer_u8);
+    var b2 = buffer_read(buffer, buffer_u8);
+    var b3 = buffer_read(buffer, buffer_u8);
+    var b4 = buffer_read(buffer, buffer_u8);
+    
+    // Combine bytes in big-endian order and convert to float
+    var bytes = (b1 << 24) | (b2 << 16) | (b3 << 8) | b4;
+    
+    // Create a buffer to convert the integer to float
+    var tmp_buffer = buffer_create(4, buffer_fixed, 1);
+    buffer_seek(tmp_buffer, buffer_seek_start, 0);
+    buffer_write(tmp_buffer, buffer_u32, bytes);
+    buffer_seek(tmp_buffer, buffer_seek_start, 0);
+    
+    // Read as float
+    var result = buffer_read(tmp_buffer, buffer_f32);
+    
+    // Clean up temporary buffer
+    buffer_delete(tmp_buffer);
+    
+    return result;
+}
+
+function buffer_read_f32le(_buffer) {
+    // Read a 32-bit floating-point number (buffer_f32) from the buffer.
+    // GML's buffer_read function automatically handles byte order based on the
+    // buffer's current type (which defaults to buffer_grow and little-endian
+    // for floats unless explicitly changed). However, for clarity and to ensure
+    // little-endian is used, we'll explicitly state it.
+    // Note: GML's buffer_f32 type is inherently little-endian on most platforms
+    // where GameMaker runs, but it's good practice to be aware of the byte order
+    // if you're dealing with external data sources.
+    var _float_value = buffer_read(_buffer, buffer_f32);
+
+    // Return the read float value.
+    return _float_value;
+}
+
+/// @function buffer_read_uint32_be(buffer)
+function buffer_read_u32be(buffer) {
+    var b1 = buffer_read(buffer, buffer_u8);
+    var b2 = buffer_read(buffer, buffer_u8);
+    var b3 = buffer_read(buffer, buffer_u8);
+    var b4 = buffer_read(buffer, buffer_u8);
+    return (b1 << 24) | (b2 << 16) | (b3 << 8) | b4;
+}
+
+/// @function buffer_read_int32_be(buffer)
+/// @param buffer The buffer to read from
+/// @returns {real} The 32-bit integer value read from the buffer
+function buffer_read_s32be(buffer) {
+    var b1 = buffer_read(buffer, buffer_u8);
+    var b2 = buffer_read(buffer, buffer_u8);
+    var b3 = buffer_read(buffer, buffer_u8);
+    var b4 = buffer_read(buffer, buffer_u8);
+    
+    // Combine bytes in big-endian order
+    var result = (b1 << 24) | (b2 << 16) | (b3 << 8) | b4;
+    
+    // Convert to signed if necessary (handle negative numbers)
+    if (result & $80000000) {
+        result = -(($FFFFFFFF - result) + 1);
+    }
+    
+    return result;
+}
+
+/// @function buffer_read_int64_be(buffer)
+/// @param buffer The buffer to read from
+/// @returns {real} The 64-bit integer value read from the buffer
+/// @note Due to GML's number limitations, very large values might lose precision
+function buffer_read_s64be(buffer) {
+    var b1 = buffer_read(buffer, buffer_u8);
+    var b2 = buffer_read(buffer, buffer_u8);
+    var b3 = buffer_read(buffer, buffer_u8);
+    var b4 = buffer_read(buffer, buffer_u8);
+    var b5 = buffer_read(buffer, buffer_u8);
+    var b6 = buffer_read(buffer, buffer_u8);
+    var b7 = buffer_read(buffer, buffer_u8);
+    var b8 = buffer_read(buffer, buffer_u8);
+    
+    // Split into high and low 32-bit parts
+    var high = (b1 << 24) | (b2 << 16) | (b3 << 8) | b4;
+    var low = (b5 << 24) | (b6 << 16) | (b7 << 8) | b8;
+    
+    // Combine the parts (need to use multiplication for the high part to preserve bits)
+    var result = (high * 4294967296) + (low >> 0);
+    
+    // Handle negative numbers
+    if (b1 & $80) {
+        // If highest bit is set (negative number)
+        result -= 9223372036854775808; // 2^63
+    }
+    
+    return result;
+}
+
+/// @function buffer_read_uint64_be(buffer)
+/// @param buffer The buffer to read from
+/// @returns {real} The unsigned 64-bit integer value read from the buffer
+/// @note Due to GML's number limitations, very large values might lose precision
+function buffer_read_u64be(buffer) {
+    var b1 = buffer_read(buffer, buffer_u8);
+    var b2 = buffer_read(buffer, buffer_u8);
+    var b3 = buffer_read(buffer, buffer_u8);
+    var b4 = buffer_read(buffer, buffer_u8);
+    var b5 = buffer_read(buffer, buffer_u8);
+    var b6 = buffer_read(buffer, buffer_u8);
+    var b7 = buffer_read(buffer, buffer_u8);
+    var b8 = buffer_read(buffer, buffer_u8);
+    
+    // Split into high and low 32-bit parts
+    var high = (b1 << 24) | (b2 << 16) | (b3 << 8) | b4;
+    var low = (b5 << 24) | (b6 << 16) | (b7 << 8) | b8;
+    
+    // Combine the parts
+    return (high * 4294967296) + (low >> 0);
+}

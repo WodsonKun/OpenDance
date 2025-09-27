@@ -1,5 +1,9 @@
 /// @description Draw pictobar and beat indicator
 
+draw_text(0, 0, string(_common_songdata.bluestarMoves0JSON[currentMoveIndex].name))
+draw_text(0, 240, string(moveTime))
+if (currentMoveData){ draw_text(0, 260, string(currentMoveData.measures)) }
+draw_text(0, 300, string(final_score))
 // Function to draw beat indicator
 draw_beat_indicator = function(beat_x, beat_y) {
     var current_scale = 1 + (beatPulseAmount * 0.3);  // 30% size increase on beat

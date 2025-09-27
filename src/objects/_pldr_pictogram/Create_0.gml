@@ -36,7 +36,13 @@ enum PictoState {
 current_state = PictoState.Entering;
 
 // Animation parameters
-enter_duration = 3000;   // Time to move to target (ms)
+if (_common_songdata.songNumCoach == 1) {
+    enter_duration = 3000;   // Time to move to target (ms)
+} else if (_common_songdata.songNumCoach == 2) {
+    enter_duration = 2700;   // Time to move to target (ms)
+} else if (_common_songdata.songNumCoach == 3 || _common_songdata.songNumCoach == 4) {
+    enter_duration = 2500;   // Time to move to target (ms)
+}
 hold_duration = 100;     // Time to hold at target (ms)
 exit_duration = 200;    // Time to fade out (ms)
 

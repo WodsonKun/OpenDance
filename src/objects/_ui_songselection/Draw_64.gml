@@ -7,7 +7,6 @@ if (select_index > 0) {
     offset = 0;
 }
 
-
 // Define what's going to be shown on-screen
 var i, i_start, i_end;
 if (select_index > 1) {
@@ -19,23 +18,23 @@ else {
     i_end = select_index + 5;
 }
 
-
+// Draw covers
 for (i = i_start; i < array_length(publishedSongData.playlists[playlist_index].songs); i++) {
     // Stores the songId
     songId = publishedSongData.playlists[playlist_index].songs[i].id
-    song = undefined;
+    songCover = undefined;
     show_debug_message("Searching for Song ID: " + string(songId));
     // Search for the song in publishedSongData.songs
     for (k = 0; k < array_length(publishedSongInfo); k++) {
         if (publishedSongInfo[k][0] == songId) {
-            song = publishedSongInfo[k];
+            songCover = publishedSongInfo[k];
             show_debug_message("Found Song: " + string(publishedSongInfo[k][1]));
         }
     }
     // Draw the song cover if found
-    if (song != undefined) {
-        if (sprite_exists(song[9])) {
-            draw_sprite_part_ext(song[9], 0, 0, 0, 640, 360, 26 + offset + (400 + 20) * i, 744, 0.6, 0.6, c_white, 1);
+    if (songCover != undefined) {
+        if (sprite_exists(songCover[9])) {
+            draw_sprite_part_ext(songCover[9], 0, 0, 0, 640, 360, 26 + offset + (400 + 20) * i, 744, 0.6, 0.6, c_white, 1);
         }
     }
 }
@@ -57,7 +56,17 @@ for (_s = 0; _s < array_length(publishedSongData.playlists[playlist_index].songs
         }
     }
 }
-    
+
+// Draws the map_bkg
+if sprite_exists(song[10]) {
+	draw_sprite_ext(song[10], 0, 0, 0, (1920 / sprite_get_width(song[10])), (1080 / sprite_get_height(song[10])), 0, c_white, 0.4);
+}
+
+// Draws the albumcoach
+if sprite_exists(song[11]) {
+	draw_sprite_stretched(song[11], 0, 1314, 128, 512, 512);
+}
+
 // Draw the song name (only if a logo doesn't exist)
 draw_set_font(_fnt_justdancecondensed_24);
 draw_text(38, 322, song[1]);

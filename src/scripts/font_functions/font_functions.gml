@@ -7,18 +7,18 @@ function draw_text_outlined(x, y, outline_color, outline_thickness, string_font,
 	//Outline  
 	draw_set_color(argument[2]);
 	draw_set_font(argument[4]);
-	draw_text(xx+argument[3], yy+argument[3], argument[6]);  
-	draw_text(xx-argument[3], yy-argument[3], argument[6]);  
-	draw_text(xx,			  yy+argument[3], argument[6]);  
-	draw_text(xx+argument[3],			  yy, argument[6]);  
-	draw_text(xx,			  yy-argument[3], argument[6]);  
-	draw_text(xx-argument[3],			  yy, argument[6]);  
-	draw_text(xx-argument[3], yy+argument[3], argument[6]);  
-	draw_text(xx+argument[3], yy-argument[3], argument[6]);
+	draw_text_scribble(xx+argument[3], yy+argument[3], argument[6]);  
+	draw_text_scribble(xx-argument[3], yy-argument[3], argument[6]);  
+	draw_text_scribble(xx,			  yy+argument[3], argument[6]);  
+	draw_text_scribble(xx+argument[3],			  yy, argument[6]);  
+	draw_text_scribble(xx,			  yy-argument[3], argument[6]);  
+	draw_text_scribble(xx-argument[3],			  yy, argument[6]);  
+	draw_text_scribble(xx-argument[3], yy+argument[3], argument[6]);  
+	draw_text_scribble(xx+argument[3], yy-argument[3], argument[6]);
 	
 	//Text  
 	draw_set_color(argument[5]);  
-	draw_text(xx, yy, argument[6]);  
+	draw_text_scribble(xx, yy, argument[6]);  
 }
 
 /// Draws text with a little dropshadow

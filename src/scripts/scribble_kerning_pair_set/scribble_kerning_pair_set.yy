@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"scribble_kerning_pair_set",
   "parent":{
-    "name":"Fonts",
-    "path":"folders/enginedata/extensions/Scribble/Fonts.yy",
+    "name":"Font Modification",
+    "path":"folders/enginedata/extensions/Scribble/Font Modification.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

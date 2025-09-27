@@ -57,7 +57,7 @@ if (global.publishedSongType == "ubiart") {
 			array_push(songGoldEffectArray, ubiartDanceTape.Clips[ClipIndex]) // Inserts the whole GoldEffectClip inside of the array
 		}
 	}
-	
+    
 	// Loads the mainsequence (if the song has one)
 	if (file_exists("opendance_data/mapdata/" + string_lower(global.publishedSongID) + "/cinematics/" + string_lower(global.publishedSongID) + "_mainsequence.tape.ckd")) {
 		ubiartMainsequence = import_json("opendance_data/mapdata/" + string_lower(global.publishedSongID) + "/cinematics/" + string_lower(global.publishedSongID) + "_mainsequence.tape.ckd", json_parse);
@@ -92,7 +92,10 @@ else if (global.publishedSongType == "bluestar") {
 	songBeatsArray = bluestarJSON.beats
 	songLyricsArray = bluestarJSON.lyrics
 	songPictoArray = bluestarJSON.pictos
-	
+    
+    // Loads moves JSON for each coach
+    bluestarMoves0JSON = import_json("opendance_data/mapdata/" + string_lower(global.publishedSongID) + "/timeline/" + string_lower(global.publishedSongID) + "_moves0.json", json_parse);
+    
 	/// Defines video path
 	global.videoPath = "opendance_data/mapdata/" + global.publishedSongID + "/videoscoach/" + string_lower(global.publishedSongID) + ".mp4"
 }

@@ -19,9 +19,9 @@ target_height = 224;
 if (_common_songdata.songNumCoach == 1) {
 	PICTO_SLIDE_TIME = 3000;    // How long pictogram takes to slide in
 } else if (_common_songdata.songNumCoach == 2) {
-	PICTO_SLIDE_TIME = 3300;    // How long pictogram takes to slide in
+	PICTO_SLIDE_TIME = 3000;    // How long pictogram takes to slide in
 } else if (_common_songdata.songNumCoach == 3 || _common_songdata.songNumCoach == 4) {
-	PICTO_SLIDE_TIME = 3400;    // How long pictogram takes to slide in
+	PICTO_SLIDE_TIME = 3000;    // How long pictogram takes to slide in
 }
 PICTO_FADE_TIME = 300;     // How long to fade out
 
@@ -40,6 +40,16 @@ GoldMoveIndex = 0;
 ambIndex = 0;
 sfxAMB = NaN;
 ambpath_file = "";
+currentMoveIndex = 0;
+
+
+// Add these variables to your Create event or variable declarations
+currentMoveData = undefined;        // Current MSM data
+currentMoveAccelData = [];         // Accelerometer data for current move
+moveStartTime = 0;                 // When current move started
+moveEndTime = 0;                   // When current move should end
+moveDuration = 0;                  // Duration of current move
+final_score = 0;
 
 // Active pictograms tracking
 active_pictograms = ds_list_create();

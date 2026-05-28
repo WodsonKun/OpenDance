@@ -7,7 +7,7 @@ OpenDance is a attempt of recreating Ubisoft's **Just Dance** gameplay through *
 ![Umbrella from Just Dance 4](https://raw.githubusercontent.com/WodsonKun/OpenDance/refs/heads/main/gitassets/umbrella_bluestar_opendance.png)
 
 ## Showcase
-[![All About That Bass [BETA Version] | Engine Showcase](https://img.youtube.com/vi/y87H3icsFrc/maxresdefault.jpg)](https://www.youtube.com/watch?v=y87H3icsFrc)
+[![I'm An Albatraoz [Beta Version] | OpenDance Engine](https://img.youtube.com/vi/DToBEpD0CeI/maxresdefault.jpg)](https://www.youtube.com/watch?v=DToBEpD0CeI)
 
 ## Description
 OpenDance aims to recreate Ubisoft's Just Dance gameplay from both **UbiArt Framework** and **Bluestar Engine**, by using **GameMaker Language**.
@@ -26,14 +26,15 @@ Bluestar Engine is a game engine also made by Ubisoft exclusively for web browse
 - Works with files from both Bluestar Engine (JSON) and UbiArt Framework (CKD), retaining the same file structure from UbiArt for easier use.
 - Video and audio playback
 - KaraokeClip, PictogramClip and GoldMoveEffectClip
+- Include MainSequence (UbiArt) suport
+
+### W.I.P.
+- MoveSpace scoring system (using MSM files and Controller)
 
 ### To-do stuff:
 - Include **Just Dance: Vitality School** (BeatsPreview JSON) support
 - Compatibility with non-Latin characters
-- MoveSpace scoring system (using MSM files and Controller / DSU)
 - Camera scoring system (using GESTURE files and Kinect)
-- Include MainSequence (UbiArt) suport
-- Improve timing system
 
 ## Credits
 ### A huge thanks to:
